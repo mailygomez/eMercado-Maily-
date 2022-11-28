@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="inicio.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="user">Usuario: </a>
+            <ul class="">
+              <li><a class="nav-link" href="cart.html" id="carrito">Mi carrito</a></li>
+              <li><a class="nav-link" id="perfil">Mi perfil </a></li>
+              <li><a class="nav-link" id="cerrar">Cerrar Sesion </a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="text-center p-4">
+    <h2>Carrito de Compras</h2>
+    <p class="lead">Articulos a comprar</p>
+  </div>
+  
+  <table class="table" >
+    <thead>
+      <tr>
+        <th class="col-2"></th>
+        <th class="col-2">Nombre</th>
+        <th class="col-2">Costo</th>
+        <th class="text-center">Cantidad</th>
+        <th class="text-center">SubTotal</th>
+        <th> <button type="button" class="btn btn-light" id="deleteAll">Vaciar el Carrito</button> </th> 
+      </tr>
+
+    </thead>
+
+    <tbody id="cartitems">
+    </tbody>
+
+  </table>
+  </div>
+
+
+  <div class="text-center mt-4 mb-4 ">
+    <p id="subtot" class="btn btn-secondary"> </p>
+    <p id="envio" class="btn btn-secondary"> </p>
+    <p id="tot" class="btn btn-secondary"></p>
+  </div>
+
+  <p id="fb" class="texto-centrado"></p>
+  <hr>
+
+
+  <form class="texto-centrado" id="f_compra" novalidate>
+    <p class="lead">Dirección de envío:</p>
+    <div class="was-validated">
+
+      <div class="container text-center  p-2">
+
+        <div class="btn">
+          <label for="numbering"></label>
+          <input type="text" class="form-control card" id="numbering" placeholder="Número" style="width:150px;"
+            required>
+          <p id="numb" class="text-danger"></p>
+        </div>
+
+        <div class="btn">
+          <label for="street"></label>
+          <input type="text" class="form-control card" id="street" placeholder="Calle" style="width:200px;" required>
+          <p id="str" class="text-danger"></p>
+        </div>
+        <div class="btn">
+          <label for="s_corner"></label>
+          <input type="text" class="form-control card" id="s_corner" placeholder="Esquina" style="width:250px;"
+            required>
+          <p id="cor" class="text-danger"></p>
+        </div>
+      </div>
+
+
+      <p class="lead">Tipo de envío:</p>
+      <input type="radio" name="envio" id="premium" required onclick="cal_Envio()"> Premium - Costo del 15%
+      delsubtotal<br>
+      <input type="radio" name="envio" id="express" onclick="cal_Envio()"> Express- Costo del 7% del subtotal
+      <br>
+      <input type="radio" name="envio" id="estandar" onclick="cal_Envio()"> Estándar- Costo del 5% del
+      subtotal<br><br>
+
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalPayment"
+        id="buttonTipoPago">Seleccionar Forma de Pago
+      </button>
+      <br> <br>
+
+      <div class="text-center mt-4 mb-4 ">
+
+        <div id="botoncompra">
+        </div>
+
+        <button id="submit" type="submit" class="btn btn-primary btn-lg">Finalizar Compra
+        </button>
+  </form>
+
+
+
+  <div class="was-validated">
+    <div class="modal fade" id="modalPayment" tabindex="-1" aria-hidden="true" required>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Seleccioná una forma de pago</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body" id="mainModal">
+            <form id="needs-validation" novalidate>
+              <div class="form-group">
+                <div class="col-4">
+                  <input type="radio" name="pago" id="card" onclick="payment_form()"> Tarjeta de crédito
+                </div>
+                <label for="nt_card"></label>
+                <input type="text" class="form-control card" id="nt_card" placeholder="Nombre del titular"
+                  pattern="[A-Za-z]+" required minlength="2">
+                <p id="fb0" class="text-danger"></p>
+
+                <label for="n_card"></label>
+                <input type="text" class="form-control card" id="n_card" oninput="imgCard()" placeholder="Número de la tarjeta"
+                  pattern="^[0-9]+$" required minlength="13" maxlength="19" size="19">
+                <p id="fb1" class="text-danger"></p>
+                <div id="imagenCard"></div>
+
+                <div class="form-group">
+                  <label for="v_card"></label>
+                  <input type="text" class="form-control card" id="v_card" placeholder="XXXX" required minlength="3"
+                    maxlength="4" size="4" pattern="^[0-9]+$">
+                  <p id="fb2" class="text-danger"></p>
+                </div>
+                <div class="form-group">
+                  <select class="form-control card" name='expireMM' id="md_card" required>
+                    <option value=''>Mes de vencimiento</option>
+                    <option value='01'>Enero</option>
+                    <option value='02'>Febrero</option>
+                    <option value='03'>Marzo</option>
+                    <option value='04'>Abril</option>
+                    <option value='05'>Mayo</option>
+                    <option value='06'>Junio</option>
+                    <option value='07'>Julio</option>
+                    <option value='08'>Agosto</option>
+                    <option value='09'>Septiembre</option>
+                    <option value='10'>Octubre</option>
+                    <option value='11'>Noviembre</option>
+                    <option value='12'>Diciembre</option>
+                  </select>
+                  <select class="form-control card" name='expireYY' id='yd_card' required>
+                    <option value=''>A&ntilde;o de vencimiento</option>
+                    <option value='22'>2022</option>
+                    <option value='23'>2023</option>
+                    <option value='24'>2024</option>
+                    <option value='25'>2025</option>
+                    <option value='26'>2026</option>
+                    <option value='27'>2027</option>
+                    <option value='28'>2028</option>
+                    <option value='29'>2029</option>
+                    <option value='30'>2030</option>
+                  </select>
+                  <p id="fb4" class="text-danger"></p>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group">
+                <div class="col-5">
+                  <input type="radio" name="pago" id="bank" onclick="payment_form()"> Transferencia bancaria
+                </div>
+                <label for="n_bank"></label>
+                <input type="text" class="form-control" id="n_bank" placeholder="Número de cuenta" required
+                  minlength="6" pattern="^[0-9]+$">
+                <p id="fb3" class="text-danger"></p>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center p-4">
+    <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a
+        Programar</a> -
+      2022</p>
+    <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+  </div>
+  </footer>
+  
+    <!-- modal -->
+
+    <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModal" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-content">
+                  <div class="modal-body">
+                    <div class="p-3 mb-2 bg-warning text-dark">
+                    <p >Para continuar Igresá tu ususario</p>
+                  </div>
+                      <label for="inputPutNombre" >Nombre de Usuario:</label>
+                      <input type="text" id="nameUser" class="form-control my-1" oninput="validityButtonIngresar()">
+                      <label for="inputPutApellido">Contrase&ntilde;a:</label>
+                      <input type="text" id="passwordUser" class="form-control my-1" oninput="validityButtonIngresar()">
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="button" class="btn btn-primary" id="ingresarProfile" data-bs-dismiss="modal"
+                          >Ingresar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="alert alert-danger visually-hidden" id="alertaDelete" role="alert">
+    Eliminado con éxito!!
+</div>
+
+<div class="alert alert-success visually-hidden" id="alertaPurchase" role="alert">
+  Compra Confirmada
+ </div>
+
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+
+</html>

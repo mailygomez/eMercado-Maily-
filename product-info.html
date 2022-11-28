@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="inicio.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="user">Usuario: </a>
+            <ul class="">
+              <li><a class="nav-link" href="cart.html" id="carrito">Mi carrito</a></li>
+              <li><a class="nav-link"  id="perfil">Mi perfil </a></li>
+              <li><a class="nav-link" id="cerrar">Cerrar Sesion </a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main> 
+    
+    <!-- modal -->
+
+    <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModal" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-content">
+                  <div class="modal-body">
+                    <div class="p-3 mb-2 bg-warning text-dark">
+                    <p >Para continuar Igresá tu ususario</p>
+                  </div>
+                      <label for="inputPutNombre" >Nombre de Usuario:</label>
+                      <input type="text" id="nameUser" class="form-control my-1" oninput="validityButtonIngresar()">
+                      <label for="inputPutApellido">Contrase&ntilde;a:</label>
+                      <input type="text" id="passwordUser" class="form-control my-1" oninput="validityButtonIngresar()">
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="button" class="btn btn-primary" id="ingresarProfile" data-bs-dismiss="modal"
+                          >Ingresar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="alert alert-success visually-hidden" id="alertaShow" role="alert">
+   Agregado con exito
+  </div>
+
+  <div class="alert alert-success visually-hidden" id="alertaShowNew" role="alert">
+    Te gustó mucho!! Agregamos uno más !!
+   </div>
+   <div class="alert alert-success visually-hidden" id="alertaComent" role="alert">
+    Gracias por tu  opinón
+   </div>
+
+
+    <div class="container" id="container">
+      <main role="main">
+        <div class="container mt-5">
+          <div class="text-center p-4">
+            <h2>Descripción del producto</h2>
+            <p class="lead">Encontrarás aquí toda la información del producto seleccionado.</p>
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="col-8">
+              <h3 id="productName"></h3>
+            </div>
+
+            <div class="col-2">
+              <button id="botonComprar" style="background-color: rgb(127, 230, 204)">Comprar</button>
+            </div>
+          </div>
+          <hr class="my-2">
+
+
+
+          <dt>Precio</dt>
+          <dd>
+            <p id="costandCurrency"></p>
+          </dd>
+
+          <dt>Descripción</dt>
+          <dd>
+            <p id="productDescription"></p>
+          </dd>
+
+          <dt>Categoría</dt>
+          <dd>
+            <p id="productCategory"></p>
+          </dd>
+
+          <dt>Cantidad vendidos</dt>
+          <dd>
+            <p id="productSoldCount"></p>
+          </dd>
+
+          <div class="text-center p-4">
+            <dt>Imágenes ilustrativas</dt>
+            <hr>
+            <dd>
+              <div id="productImages" class="container">
+              </div>
+          </div>
+          </dd>
+          </dl>
+        </div>
+
+
+        <div class="text-center p-4">
+
+          <h2>Comentarios </h2>
+          <div class="container" id="comentarios">
+
+          </div>
+          <div id="estrella"></div>
+          <h2>Comentar</h2>
+          <h6>tu opinon</h6>
+
+          <textarea id="opinion" name="opinion"></textarea>
+
+          <h6>tu puntuacion</h6>
+
+          <select id="puntos">
+            <option value="0" hidden selected disabled>-- Califica del 1 al 5 --</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select><br>
+          <br>
+          <input type="submit" id="enviar">
+
+          <div class="text-center p-4">
+            <hr class="my-3">
+            <h2>Productos Relacionados </h2>
+            <div class="container" id="productSRelacionados">
+
+            </div>
+      </main>
+    </div>
+    </div>
+  </main>
+
+  <!-- modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
+        2022</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/product-info.js"></script>
+
+
+</body>
+
+</html>
